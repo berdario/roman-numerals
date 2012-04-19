@@ -101,19 +101,11 @@ def int_to_roman(n):
 			
 
 from unittest import TestCase, main
-from functools import partial
-from types import MethodType
 
 class TestNumbers(TestCase):
-	pass
-
-def test_number(self, n):
-	self.assertEqual(self, n, roman_to_int(int_to_roman(n)))
-
-for i in range(1):
-	name = str(i)
-	test_method = MethodType(partial(test_number, n=i), TestNumbers)
-	setattr(TestNumbers, "test" + name, test_method)
+	def test_number(self):
+		for i in range(10000):
+			self.assertEqual(i, roman_to_int(int_to_roman(i)))
 
 if __name__ == "__main__":
 	main()
