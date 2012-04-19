@@ -69,4 +69,37 @@ def roman_to_int(num):
 	sliced_digits = [roman_digits[s] for s in slices]
 	return sum(_get_slice_value(s) for s in sliced_digits)
 
+int_values = [
+	(1000, 'M'),
+	(500, 'D'),
+	(100, 'C'),
+	(50, 'L'),
+	(10, 'X'),
+	(5, 'V'),
+	(1, 'I')
+]
 
+repeatable_values = [
+	(1000, 'M'),
+	(100, 'C'),
+	(10, 'X'),
+	(1, 'I'),
+	(0, '')
+]
+
+
+def int_to_roman(n):
+	result = ""
+	for v,l in int_values:
+		nextv, nextl = next(filter(lambda l: l[0]<v, repeatable_values)) # subtractable_letter
+		result += l * (n // v)
+		n = n % v
+		if n >= v - nextv:
+			result += nextl+l
+			n -= v - nextv
+	return result
+			
+
+if __name__ == "__main__":
+	for n in range(20):
+		print(n, int_to_roman(n))
